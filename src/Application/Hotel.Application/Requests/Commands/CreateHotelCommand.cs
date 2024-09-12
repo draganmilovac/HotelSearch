@@ -1,6 +1,5 @@
 ﻿using BuildingBlocks.CQRS;
 using HotelApplication.Dtos;
-using HotelData.Models;
 
 
 namespace HotelApplication.Requests.Commands

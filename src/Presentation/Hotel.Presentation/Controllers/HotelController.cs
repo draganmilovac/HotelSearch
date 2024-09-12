@@ -24,6 +24,10 @@ namespace HotelPresentation.Controllers
         #endregion
 
         #region Endpoints
+        /// <summary>
+        /// Gets the list of all created hotels
+        /// </summary>
+        /// <returns>The list of all created hotels</returns>
         [HttpGet]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,16 +38,26 @@ namespace HotelPresentation.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Gets the hotel with specified identifier, if exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The hotel with specified identifier, if exists</returns>
         [HttpGet("{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllHotels(long id)
+        public async Task<IActionResult> GetHotelById(long id)
         {
-            var response = await _mediator.Send(new GetHotelsQuery());
+            var response = await _mediator.Send(new GetHotelByIdQuery(id));
             return Ok(response);
         }
 
+        /// <summary>
+        /// Creates a new hotel, based on a specefied request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>New created hotel</returns>
         [HttpPost]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(CreateHotelCommand), StatusCodes.Status201Created)]
@@ -54,6 +68,37 @@ namespace HotelPresentation.Controllers
             var response = await _mediator.Send(new CreateHotelCommand(hotelDto));
             return CreatedAtAction(nameof(CreateHotelCommand),
                 new { id = response }, response);
+        }
+
+        /// <summary>
+        /// Delete hotel based on specified identifier, if exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteHotel(long id)
+        {
+            var response = await _mediator.Send(new DeleteHotelCommand(id));
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Update hotel's values based on request and id
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="id"></param>
+        /// <returns>Updated hotel</returns>
+        [HttpPut]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateHotel(HotelDto request, long id)
+        {
+            var response = await _mediator.Send(new UpdateHotelCommand(request, id));
+            return Ok(response);
         }
         #endregion
     }
