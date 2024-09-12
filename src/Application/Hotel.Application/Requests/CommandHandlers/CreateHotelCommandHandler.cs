@@ -5,8 +5,6 @@ using HotelApplication.Requests.Commands;
 using HotelData.Abstractions;
 using HotelData.Models;
 using Microsoft.Extensions.Logging;
-using FluentValidation;
-using ValidationException = FluentValidation.ValidationException;
 
 namespace HotelApplication.Requests.CommandHandlers
 {
