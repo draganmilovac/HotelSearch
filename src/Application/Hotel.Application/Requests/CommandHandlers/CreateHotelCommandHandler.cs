@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BuildingBlocks.CQRS;
+using BuildingBlocks.Exceptions;
 using HotelApplication.Requests.Commands;
 using HotelData.Abstractions;
 using HotelData.Models;
 using Microsoft.Extensions.Logging;
+using BuildingBlocks.Exceptions;
 
 namespace HotelApplication.Requests.CommandHandlers
 {
@@ -30,7 +32,7 @@ namespace HotelApplication.Requests.CommandHandlers
             if(request.HotelDto == null)
             {
                 _logger.LogError("It's not possible to create new record.");
-                return null;
+                throw new BadRequestException("It's not possible to create new record");
             }
             var hotel = _mapper.Map<Hotel>(request.HotelDto);
             var response = await _hotelRepository.CreateAsync(hotel);

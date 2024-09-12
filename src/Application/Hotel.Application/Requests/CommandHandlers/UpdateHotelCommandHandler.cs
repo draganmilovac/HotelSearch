@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuildingBlocks.CQRS;
+using BuildingBlocks.Exceptions;
 using HotelApplication.Dtos;
 using HotelApplication.Requests.Commands;
 using HotelData.Abstractions;
@@ -34,7 +35,7 @@ namespace HotelApplication.Requests.CommandHandlers
             if (hotel == null)
             {
                 _logger.LogError($"Hotel with id:{command.Id} does not exist");
-                return null;
+                throw new BadRequestException($"It's not possible to update hotel with id:{command.Id}");
             }
 
             _logger.LogInformation($"Start updating hotel with id:{hotel.Id}");

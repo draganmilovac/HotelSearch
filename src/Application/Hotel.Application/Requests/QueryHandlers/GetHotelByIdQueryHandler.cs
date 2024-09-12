@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuildingBlocks.CQRS;
+using BuildingBlocks.Exceptions;
 using HotelApplication.Dtos;
 using HotelApplication.Requests.Queries;
 using HotelData.Abstractions;
@@ -33,7 +34,7 @@ namespace HotelApplication.Requests.QueryHandlers
             if (hotel == null)
             {
                 _logger.LogError($"Hotel with id: {query.Id} does not exist.");
-                return null;
+                throw new NotFoundException($"Hotel with id {query.Id} was not found");
             }
 
             _logger.LogInformation($"Hotel with {query.Id} is found");
