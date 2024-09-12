@@ -10,6 +10,7 @@ namespace Hotel.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<ILocationHotelRepository, LocationHotelRepository>();
             services.AddSingleton<Hotels>();
             return services;
         }

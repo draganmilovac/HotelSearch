@@ -8,6 +8,7 @@ namespace HotelApplication.Dtos.Profiles
         public MappingProfile()
         {
             CreateMap<HotelDto, Hotel>().ReverseMap();
+            CreateMap<SortedHotelsDto, Hotel>().ReverseMap();
         }
     }
 }
