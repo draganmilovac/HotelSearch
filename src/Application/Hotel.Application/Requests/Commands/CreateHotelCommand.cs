@@ -1,10 +1,11 @@
 ﻿using BuildingBlocks.CQRS;
+using HotelApplication.Dtos;
 using HotelData.Models;
 
 
 namespace HotelApplication.Requests.Commands
 {
-    public record CreateHotelCommand(Hotel Hotel) : ICommand<CreateHotelCommandResult>
+    public record CreateHotelCommand(HotelDto HotelDto) : ICommand<CreateHotelCommandResult>
     {
     }
     public record CreateHotelCommandResult(long Id);

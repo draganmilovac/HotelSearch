@@ -1,4 +1,5 @@
-﻿using HotelApplication.Requests.Commands;
+﻿using HotelApplication.Dtos;
+using HotelApplication.Requests.Commands;
 using HotelApplication.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -48,9 +49,9 @@ namespace HotelPresentation.Controllers
         [ProducesResponseType(typeof(CreateHotelCommand), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateHotel([FromBody] HotelData.Models.Hotel request)
+        public async Task<IActionResult> CreateHotel([FromBody] HotelDto hotelDto)
         {
-            var response = await _mediator.Send(new CreateHotelCommand(request));
+            var response = await _mediator.Send(new CreateHotelCommand(hotelDto));
             return CreatedAtAction(nameof(CreateHotelCommand),
                 new { id = response }, response);
         }

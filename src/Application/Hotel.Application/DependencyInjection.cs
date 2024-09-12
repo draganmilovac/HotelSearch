@@ -11,7 +11,8 @@ namespace HotelApplication
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssemblies(assembly));
 
-         
+            services.AddAutoMapper(assembly);
+
             return services;
         }
     }
