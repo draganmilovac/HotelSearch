@@ -66,7 +66,7 @@ namespace HotelPresentation.Controllers
         public async Task<IActionResult> CreateHotel([FromBody] HotelDto hotelDto)
         {
             var response = await _mediator.Send(new CreateHotelCommand(hotelDto));
-            return CreatedAtAction(nameof(CreateHotelCommand),
+            return CreatedAtAction(nameof(GetHotelById),
                 new { id = response }, response);
         }
 

@@ -5,7 +5,8 @@ using HotelApplication.Requests.Commands;
 using HotelData.Abstractions;
 using HotelData.Models;
 using Microsoft.Extensions.Logging;
-using BuildingBlocks.Exceptions;
+using FluentValidation;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace HotelApplication.Requests.CommandHandlers
 {
@@ -22,14 +23,13 @@ namespace HotelApplication.Requests.CommandHandlers
         {
             _hotelRepository = hotelRepository ?? throw new ArgumentNullException(nameof(hotelRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        }
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));        }
         #endregion
 
         #region Public methods
         public async Task<CreateHotelCommandResult> Handle(CreateHotelCommand request, CancellationToken cancellationToken)
         {
-            if(request.HotelDto == null)
+            if (request.HotelDto == null)
             {
                 _logger.LogError("It's not possible to create new record.");
                 throw new BadRequestException("It's not possible to create new record");

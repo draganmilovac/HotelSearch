@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BuildingBlocks.Behaviours;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelApplication
 {
@@ -8,10 +10,14 @@ namespace HotelApplication
         {
             var assembly = typeof(DependencyInjection).Assembly;
 
-            services.AddMediatR(configuration =>
-                configuration.RegisterServicesFromAssemblies(assembly));
-
             services.AddAutoMapper(assembly);
+            services.AddMediatR(configuration =>
+            {
+                configuration.RegisterServicesFromAssemblies(assembly);
+                configuration.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+            });
+            services.AddValidatorsFromAssembly(assembly);
+
 
             return services;
         }
