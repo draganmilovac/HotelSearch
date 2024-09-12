@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="4.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Hotel.Application\HotelApplication.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Hotel.Infrastructure\Hotel.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Presentation\Hotel.Presentation\HotelPresentation.csproj" />
+  </ItemGroup>
+
+</Project>
