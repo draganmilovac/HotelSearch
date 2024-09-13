@@ -1,8 +1,6 @@
-﻿using HotelData.Filtering;
-
-namespace Hotel.Infrastructure.Extensions
+﻿namespace HotelData.Filtering
 {
-    public static class IOrderedEnumerableExtensions
+    public static class OrderedEnumerableExtensions
     {
         #region Public methods
         public static async Task<FilterResult<T>> ApplyPagination<T>(this IEnumerable<T> elements,

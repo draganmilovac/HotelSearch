@@ -1,5 +1,4 @@
 ﻿using GeoCoordinatePortable;
-using Hotel.Infrastructure.Extensions;
 using Hotel.Infrastructure.Models;
 using HotelData.Abstractions;
 using HotelData.Filtering;
