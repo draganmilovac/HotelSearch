@@ -33,12 +33,17 @@ namespace Hotel.Infrastructure.Repositories
                 //it will return distance in km
                 var distance = currentLocation.GetDistanceTo(hotelLocation) / 1000;
                 _logger.LogInformation($"Distance between hotel with id {hotel.Id} and current location is: {distance}km");
-                hotels.Add(new HotelData.Models.Hotel()
+
+                //return hotels within a 20 km radius only
+                if (distance < 20)
                 {
-                    Distance = distance,
-                    Price = hotel.Price,
-                    Name = hotel.Name
-                });
+                    hotels.Add(new HotelData.Models.Hotel()
+                    {
+                        Distance = Math.Round(distance, 2),
+                        Price = hotel.Price,
+                        Name = hotel.Name
+                    });
+                }
             }
 
             //Ordered list of hotels

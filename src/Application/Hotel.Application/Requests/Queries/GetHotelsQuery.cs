@@ -1,5 +1,5 @@
 ﻿using BuildingBlocks.CQRS;
-using HotelData.Models;
+using HotelApplication.Dtos;
 
 namespace HotelApplication.Requests.Queries
 {
@@ -7,5 +7,5 @@ namespace HotelApplication.Requests.Queries
     {
     }
 
-    public record GetHotelQueryResult(IEnumerable<Hotel> Hotels);
+    public record GetHotelQueryResult(IEnumerable<HotelDto> Hotels);
 }

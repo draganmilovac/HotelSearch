@@ -2,11 +2,6 @@
 using HotelBooking.Test.Lists;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Test.Repositories
 {
@@ -39,6 +34,43 @@ namespace HotelBooking.Test.Repositories
             var hotelRepository = new HotelRepository(_hotelLists.Hotels, _mockLogger.Object);
             var result = await hotelRepository.CreateAsync(hotel);
             Assert.Equal(5, result);
+        }
+        [Fact]
+        public async Task GetHotelElementAsync_ShouldReturnElementResult()
+        {
+            var hotelRepository = new HotelRepository(_hotelLists.Hotels, _mockLogger.Object);
+            var result = await hotelRepository.GetHotelAsync(1);
+            Assert.NotNull(result);
+            Assert.Equal("Hotel 1", result.Name);
+        }
+        [Fact]
+        public async Task GetHotelElementsAsync_ShouldReturnListOfHotelElements()
+        {
+            var hotelRepository = new HotelRepository(_hotelLists.Hotels, _mockLogger.Object);
+            var result = await hotelRepository.GetAllHotelAsync();
+            Assert.Equal(4, result.Count());
+            Assert.Equal("Hotel 2", result.Where(x => x.Id == 2).Select(n => n.Name).FirstOrDefault());
+        }
+        [Fact]
+        public async Task UpdateHotelElementsAsync_ShouldUpdateHotelElement()
+        {
+            HotelData.Models.Hotel hotel = new HotelData.Models.Hotel()
+            {
+                Name = "Hotel 6",
+                Price = 20,
+                Latitude = 45.237212010810886,
+                Longitude = 19.810189977197428
+            };
+            var hotelRepository = new HotelRepository(_hotelLists.Hotels, _mockLogger.Object);
+            var result = await hotelRepository.UpdateAsync(hotel, 1);
+            Assert.Equal("Hotel 6", result.Name);
+        }
+        [Fact]
+        public async Task DeleteHotelElementsAsync_ShouldRemoveHotelElementFromList()
+        {
+            var hotelRepository = new HotelRepository(_hotelLists.Hotels, _mockLogger.Object);
+            var result = await hotelRepository.DeleteAsync(1);
+            Assert.True(result);
         }
         #endregion
     }
